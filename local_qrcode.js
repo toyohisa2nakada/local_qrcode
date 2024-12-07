@@ -14,7 +14,7 @@ const _load_script = function (fname) {
 await _load_script("https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js");
 
 
-// 要素を作ってプロパティを設定する。
+// 要素を作ってプロパティを設定する。デバッグ用
 [Array, "a2e"].reduce((a, e) => {
     a.prototype[e] = function () { return this.reduce((e, f) => { f(e); return e; }); };
     Object.defineProperty(a.prototype, e, { enumerable: false });
@@ -46,10 +46,6 @@ export const local_qrcode = {
                 if (ice?.candidate && ice.candidate.candidate) {
                     try {
                         const ip = /([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(ice.candidate.candidate)[1];
-                        document.body.appendChild([
-                            document.createElement("div"),
-                            e => e.textContent = `ip=${ip}`,
-                        ].a2e())
                         pc.onicecandidate = () => { };
                         resolve(ip);
 
