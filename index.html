@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+<body>
+    <div>
+        <!-- urlの表示用 -->
+        <span id="own_url"></span>
+    </div>
+    <div>
+        <!-- QRコード, サイズはライブラリ(qrious)が設定してくれる -->
+        <canvas id="qr_code"></canvas>
+    </div>
+</body>
+
+<script type="module">
+
+    const { local_qrcode } = await import("./local_qrcode.js");
+    await local_qrcode.inject(document.getElementById("qr_code"));
+    document.getElementById("own_url").innerText = await local_qrcode.url();
+</script>
+
+</html>
